@@ -9,3 +9,8 @@
 .btn {
     @apply bg-indigo-600 p-2 rounded text-lg font-semibold hover:bg-indigo-700 transition
 }
+
+.top-nav-item {
+    @apply font-semibold hover:text-slate-400 transition
+}
+

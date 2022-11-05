@@ -5,13 +5,13 @@ import DashboardHeader from "./DashboardHeader";
 
 const DashboardLayout = () => {
 	return (
-		<>
+		<div className="min-h-screen">
 			<DashboardHeader />
-			<div className="">
+			<div className="px-4">
 				<Outlet />
 			</div>
 			<DashboardFooter />
-		</>
+		</div>
 	);
 };
 

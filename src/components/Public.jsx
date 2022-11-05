@@ -36,7 +36,7 @@ const Public = () => {
 						<h6>Login</h6>
 					</Link>
 					<Link
-						to="/login"
+						to="/registration"
 						className="bg-slate-800 p-4 rounded hover:bg-slate-600 transition"
 					>
 						<h6>Register</h6>

@@ -11,13 +11,16 @@ const Input = ({
 }) => {
 	return (
 		<div className="mb-2 w-full">
-			<label htmlFor={id}>{label}</label>
+			<label className="text-lg" htmlFor={id}>
+				{label}
+			</label>
 			<input
-				className="w-full rounded"
+				className="w-full rounded text-slate-800"
 				type={type}
 				name={name}
 				placeholder={placeholder}
 				required={required}
+				id={id}
 				{...rest}
 			/>
 		</div>
