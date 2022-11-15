@@ -34,4 +34,25 @@
     p {
         @apply py-2
     }
+
+    table{
+        @apply table-auto w-full border-collapse border border-slate-400 rounded
+    }
+
+    thead{
+        
+    }
+
+    tr {
+
+    }
+
+    th{
+        @apply text-left font-semibold border border-slate-400 p-2
+    }
+
+    td{
+        @apply text-left border border-slate-400 p-2
+    }
+
 }

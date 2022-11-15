@@ -4,14 +4,14 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { selectUserById } from "./usersApiSlice";
 
-const User = ({ userId }) => {
+const UserRow = ({ userId }) => {
 	const navigate = useNavigate();
 	const user = useSelector((state) => selectUserById(state, userId));
 
 	if (user) {
 		const handleEdit = () => navigate(`/dashboard/users/${userId}`);
 		const userRoles = user.roles.toString().replaceAll(",", ", ");
-		const cellStatus = user.active ? "active" : "inactive";
+
 		return (
 			<tr>
 				<td>{user.username}</td>
@@ -27,4 +27,4 @@ const User = ({ userId }) => {
 	} else return;
 };
 
-export default User;
+export default UserRow;
