@@ -29,10 +29,39 @@ export const notesApiSlice = apiSlice.injectEndpoints({
 				} else return [{ type: "Note", id: "LIST" }];
 			},
 		}),
+		createNewNote: builder.mutation({
+			query: (initialNoteData) => ({
+				url: "/notes",
+				method: "POST",
+				body: { ...initialNoteData },
+			}),
+			invalidatesTags: [{ type: "Note", id: "List" }],
+		}),
+		updateNote: builder.mutation({
+			query: (initialNoteData) => ({
+				url: "/notes",
+				method: "PATCH",
+				body: { ...initialNoteData },
+			}),
+			invalidatesTags: (result, err, args) => [{ type: "Note", id: args.id }],
+		}),
+		deleteNote: builder.mutation({
+			query: ({ id }) => ({
+				url: "/notes",
+				method: "DELETE",
+				body: { id },
+			}),
+			invalidatesTags: (result, err, args) => [{ type: "Note", id: args.id }],
+		}),
 	}),
 });
 
-export const { useGetNotesQuery } = notesApiSlice;
+export const {
+	useGetNotesQuery,
+	useCreateNewNoteMutation,
+	useUpdateNoteMutation,
+	useDeleteNoteMutation,
+} = notesApiSlice;
 
 // Selectors
 // ========>

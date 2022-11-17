@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faCheckCircle,
+	faCircleXmark,
 	faPenToSquare,
-	faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { selectNoteById } from "./notesApiSlice";
@@ -25,7 +25,7 @@ const NoteRow = ({ noteId }) => {
 					{note?.completed ? (
 						<FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />
 					) : (
-						<FontAwesomeIcon icon={faTimes} className="text-red-500" />
+						<FontAwesomeIcon icon={faCircleXmark} className="text-red-500" />
 					)}
 				</td>
 				<td>{new Date(note?.updatedAt).toLocaleDateString()}</td>

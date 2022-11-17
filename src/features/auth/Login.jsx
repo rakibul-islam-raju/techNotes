@@ -1,22 +1,43 @@
-import React from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+	.object({
+		username: yup.string().min(4).max(12).required(),
+		password: yup.string().min(6).max(32).required(),
+	})
+	.required();
 
 const Login = () => {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm({ resolver: yupResolver(schema) });
+
+	const onSubmit = (data) => console.log(data);
+
 	return (
 		<div className="flex h-screen">
 			<div className="m-auto card w-4/12">
 				<h4>Login</h4>
 				<hr className="my-4" />
 
-				<form className="mb-2">
+				<form className="mb-2" onSubmit={handleSubmit(onSubmit)} noValidate>
 					<Input
 						label={"Username"}
 						name={"username"}
 						id={"username"}
 						placeholder={"Your Username"}
 						required
+						register={register}
+						error={errors?.username}
+						msg={errors?.username?.message}
 					/>
 					<Input
 						label={"Password"}
@@ -25,6 +46,9 @@ const Login = () => {
 						id={"password"}
 						placeholder={"Your Password"}
 						required
+						register={register}
+						error={errors?.password}
+						msg={errors?.password?.message}
 					/>
 					<div className="mt-6">
 						<Button type="submit" fullWidth>
