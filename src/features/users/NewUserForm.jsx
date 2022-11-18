@@ -6,6 +6,8 @@ import Button from "../../components/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import YupPassword from "yup-password";
 import * as yup from "yup";
+import { useEffect, useState } from "react";
+import ErrorMessage from "../../components/ErrorMessage";
 YupPassword(yup);
 
 const schema = yup
@@ -27,24 +29,42 @@ const schema = yup
 	.required();
 
 const NewUserForm = () => {
+	const navigate = useNavigate();
 	const [createNewUser, { isLoading, isSuccess, data, isError, error }] =
 		useCreateNewUserMutation();
-	const navigate = useNavigate();
 
 	const {
 		register,
 		handleSubmit,
-		watch,
+		reset,
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(schema) });
 
-	const onSubmit = (data) => console.log(data);
+	const [errorMessage, setErrorMessage] = useState(null);
+
+	const onSubmit = async (data) => {
+		console.log(data);
+		await createNewUser(data);
+	};
+
+	useEffect(() => {
+		console.log("data =>", data);
+		if (data?.success) {
+			// reset();
+			window.alert("User created!"); //Todo replace with a toast
+			// navigate("/login");
+		} else {
+			setErrorMessage(data?.error);
+		}
+	}, [data, reset, navigate]);
 
 	return (
-		<div className="py-4">
-			<h2>Create New User</h2>
-			<hr className="my-4" />
-			<div className="card w-4/12 mx-auto mt-6">
+		<div className="flex h-screen">
+			<div className="m-auto card w-4/12">
+				<h4>Create New Account</h4>
+				<hr className="my-4" />
+				{errorMessage && <ErrorMessage message={errorMessage} />}
+
 				<form onSubmit={handleSubmit(onSubmit)} noValidate>
 					<Input
 						required
@@ -79,7 +99,7 @@ const NewUserForm = () => {
 						msg={errors?.confirmPassword?.message}
 					/>
 					<div className="mt-6">
-						<Button type="submit" fullWidth>
+						<Button type="submit" loading={isLoading} fullWidth>
 							Create Account
 						</Button>
 					</div>

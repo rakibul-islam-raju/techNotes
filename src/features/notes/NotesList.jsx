@@ -11,9 +11,12 @@ const NotesList = () => {
 		isSuccess,
 		isError,
 		error,
-	} = useGetNotesQuery();
-
-	console.log("err==>>", notes);
+	} = useGetNotesQuery(null, {
+		pollingInterval: 20000,
+		refetchOnFocus: true,
+		refetchOnMountOrArgChange: true,
+		refetchOnReconnect: true,
+	});
 
 	let content;
 

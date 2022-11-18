@@ -21,7 +21,7 @@ const App = () => {
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Public />} />
 					<Route path="login" element={<Login />} />
-					<Route path="registration" element={<Register />} />
+					<Route path="registration" element={<NewUserForm />} />
 					<Route path="reset-password" element={<ForgetPassword />} />
 
 					<Route path="dashboard" element={<DashboardLayout />}>
@@ -29,7 +29,7 @@ const App = () => {
 						<Route path="users">
 							<Route index element={<UsersList />} />
 							<Route path=":id" element={<EditUser />} />
-							<Route path="new" element={<NewUserForm />} />
+							{/* <Route path="new" element={<NewUserForm />} /> */}
 						</Route>
 						<Route path="notes">
 							<Route index element={<NotesList />} />
