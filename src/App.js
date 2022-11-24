@@ -10,7 +10,6 @@ import Login from "./features/auth/Login";
 import Welcome from "./features/auth/Welcome";
 import NotesList from "./features/notes/NotesList";
 import UsersList from "./features/users/UsersList";
-import Register from "./features/auth/Register";
 import ForgetPassword from "./features/auth/ForgetPassword";
 import "./App.css";
 

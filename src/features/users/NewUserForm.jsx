@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useCreateNewUserMutation } from "./usersApiSlice";
 import Input from "../../components/Input";
@@ -12,7 +12,7 @@ YupPassword(yup);
 
 const schema = yup
 	.object({
-		username: yup.string().min(4).max(12).required(),
+		username: yup.string().min(4).max(24).required(),
 		password: yup
 			.string()
 			.min(6)
@@ -48,11 +48,10 @@ const NewUserForm = () => {
 	};
 
 	useEffect(() => {
-		console.log("data =>", data);
 		if (data?.success) {
-			// reset();
 			window.alert("User created!"); //Todo replace with a toast
-			// navigate("/login");
+			reset();
+			navigate("/login");
 		} else {
 			setErrorMessage(data?.error);
 		}
@@ -65,7 +64,7 @@ const NewUserForm = () => {
 				<hr className="my-4" />
 				{errorMessage && <ErrorMessage message={errorMessage} />}
 
-				<form onSubmit={handleSubmit(onSubmit)} noValidate>
+				<form className="mb-2" onSubmit={handleSubmit(onSubmit)} noValidate>
 					<Input
 						required
 						label={"Username"}
@@ -104,6 +103,12 @@ const NewUserForm = () => {
 						</Button>
 					</div>
 				</form>
+				<div className="text-center">
+					Already have an account?{" "}
+					<Link to="/login" className="text-indigo-500 mt-4 text-center">
+						Login
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
